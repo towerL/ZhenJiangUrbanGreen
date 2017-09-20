@@ -55,7 +55,8 @@ Param中带"*"的为一定包含的参数
     *   int limit,
         string type 类型,
         string UGO_ID 绿化对象ID
-    }
+        string date 巡查日期
+    }
     Return: List<{
         IR_ID
         IR_Code
@@ -95,7 +96,9 @@ Param中带"*"的为一定包含的参数
         bool is_activity 是否为活动
         bool is_conclude 是否结案
         string UGO_ID 绿化对象ID
-    }
+        string date 事件日期
+        string eventType 事件类型
+    }
     Return: List<{
         UGE_Code
         UGE_DamageDegree
