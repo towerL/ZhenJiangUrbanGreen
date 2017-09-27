@@ -14,7 +14,7 @@
         <item>其他</item>
     </string-array>
     <string-array name="maintainDate">
-        <item>管养年份</item>
+        <item>年份</item>
         <item>2011</item>
         <item>2012</item>
         <item>2013</item>
@@ -27,5 +27,18 @@
         <item>审核情况</item>
         <item>是</item>
         <item>否</item>
+    </string-array>
+    <string-array name="eventType">
+        <item>事件类型</item>
+        <item>自然灾害</item>
+        <item>病虫灾害</item>
+        <item>人为事故</item>
+        <item>交通事故</item>
+    </string-array>
+    <string-array name="inspectType">
+        <item>巡查类型</item>
+        <item>保洁考核</item>
+        <item>管养考核</item>
+        <item>日常巡查</item>
     </string-array>
 </resources>

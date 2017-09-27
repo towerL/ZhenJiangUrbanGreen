@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.nju.urbangreen.zhenjiangurbangreen.attachments.AttachmentRecord;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.GreenObjectSug;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.GreenObject;
+import com.nju.urbangreen.zhenjiangurbangreen.inspectRecord.Inspect;
 import com.nju.urbangreen.zhenjiangurbangreen.maintainRecord.Maintain;
 import com.nju.urbangreen.zhenjiangurbangreen.message.Message;
 
@@ -57,6 +58,8 @@ public class WebServiceUtils {
     public static final String Login = "Login";
     public static final String Get_Maintain_Record = "GetMaintainRecord";
     public static final String Get_Maintain_Record_UGO = "GetMaintainRecordUGO";
+    public static final String Get_Inspect_Record = "GetInspectRecord";
+    public static final String Add_Inspect_Record = "AddInspectRecord";
     public static final String Add_Maintain_Record = "AddMaintainRecord";
     public static final String Get_UGO_Info_Except_ST = "GetUGOInfoExceptST";//ST表示行道树
     public static final String Get_Near_Street_Tree = "GetNearStreetTree";
@@ -75,6 +78,7 @@ public class WebServiceUtils {
     public static final String Get_Messages = "GetAllMessage";
     public static final String Update_Message = "UpdateMessage";
     public static final String Update_Maintain_Record = "UpdateMaintainRecord";
+    public static final String Update_Inspect_Record = "UpdateInspectRecord";
     public static final String Delete_Message = "DeleteMessage";
     /**
      * 登录名
@@ -234,6 +238,97 @@ public class WebServiceUtils {
         }
     }
 
+    public static List<Inspect> getInspectRecord(Map<String, Object> query, String[] errorMessage) {
+        if (is_offline()) {
+            errorMessage[0] = "网络连接断开，请稍后再试";
+            return null;
+        }
+        Map<String, Object> res = callMethod(Get_Inspect_Record, query);
+        if (Integer.parseInt(res.get(KEY_SUCCEED).toString()) == RESULT_SUCCEED) {
+            return gson.fromJson(res.get(KEY_RESULT).toString(),
+                    new TypeToken<List<Inspect>>() {
+                    }.getType());
+        } else {
+            if (errorMessage != null && res.get(KEY_ERRMESSAGE) != null) {
+                errorMessage[0] = res.get(KEY_ERRMESSAGE).toString();
+            }
+            return null;
+        }
+    }
+
+    public static boolean AddInspectRecord(String[] errorMessage,Inspect inspectObject) {
+        if (is_offline()) {
+            errorMessage[0] = "网络连接断开，请稍后再试";
+        }
+        Map<String, Object> params = new HashMap<>();
+        params.put("type", inspectObject.getIR_Type());
+        params.put("date", inspectObject.getIR_InspectDate());
+        params.put("UGO_ID", inspectObject.getUGO_IDs());
+        if (inspectObject.getIR_Content() != null) {
+            params.put("content", inspectObject.getIR_Content());
+        }
+        if (inspectObject.getIR_Score() != null) {
+            params.put("score", inspectObject.getIR_Score());
+        }
+        if (inspectObject.getIR_Content() != null) {
+            params.put("inspector", inspectObject.getIR_Inspector());
+        }
+//        if (inspectObject.getIR_Content() != null) {
+//            params.put("location", inspectObject.);
+//        }
+        if (inspectObject.getIR_Content() != null) {
+            params.put("opinion", inspectObject.getIR_InspectOpinion());
+        }
+
+
+        Map<String, Object> results = callMethod(Add_Inspect_Record, params);
+        if (Integer.parseInt(results.get(KEY_SUCCEED).toString()) == RESULT_SUCCEED) {
+            return true;
+        } else {
+            if (errorMessage != null && results.get(KEY_ERRMESSAGE) != null) {
+                errorMessage[0] = results.get(KEY_ERRMESSAGE).toString();
+                Log.i("错误消息", "checkUpdate: " + errorMessage[0]);
+            }
+            return false;
+        }
+
+    }
+
+    public static boolean UpdateInspetRecord(String[] errorMessage, Inspect inspectObject) {
+        if (is_offline()) {
+            errorMessage[0] = "网络连接断开，请稍后再试";
+        }
+        Map<String, Object> params = new HashMap<>();
+        params.put("id",  inspectObject.getIR_ID());
+        params.put("type", inspectObject.getIR_Type());
+        params.put("date", inspectObject.getIR_InspectDate());
+        params.put("UGO_ID", inspectObject.getIR_ID());
+        if (inspectObject.getIR_Content() != null) {
+            params.put("content", inspectObject.getIR_Content());
+        }
+        if (inspectObject.getIR_Score() != null) {
+            params.put("score", inspectObject.getIR_Score());
+        }
+        if (inspectObject.getIR_Content() != null) {
+            params.put("inspector", inspectObject.getIR_Inspector());
+        }
+        if (inspectObject.getIR_Content() != null) {
+            params.put("opinion", inspectObject.getIR_InspectOpinion());
+        }
+
+        Map<String, Object> results = callMethod(Update_Inspect_Record, params);
+        if (Integer.parseInt(results.get(KEY_SUCCEED).toString()) == RESULT_SUCCEED) {
+            return true;
+        } else {
+            if (errorMessage != null && results.get(KEY_ERRMESSAGE) != null) {
+                errorMessage[0] = results.get(KEY_ERRMESSAGE).toString();
+                Log.i("错误消息", "checkUpdate: " + errorMessage[0]);
+            }
+            return false;
+        }
+    }
+
+
     public static List<GreenObject> GetMaintainRecordUGO(String record_id, String[] errorMessage) {
         if (is_offline()) {
             errorMessage[0] = "网络连接断开，请稍后再试";
@@ -346,17 +441,18 @@ public class WebServiceUtils {
 
     }
 
-    public static boolean AddMaintainRecord(String[] errorMessage,Maintain maintainObject) {
+
+    public static boolean AddMaintainRecord(String[] errorMessage,Maintain inspectObject) {
         if (is_offline()) {
             errorMessage[0] = "网络连接断开，请稍后再试";
         }
         Map<String, Object> params = new HashMap<>();
-        params.put("type", maintainObject.MR_MaintainType);
-        params.put("date", maintainObject.MR_MaintainDate);
-        params.put("staff", maintainObject.MR_MaintainStaff);
-        params.put("UGO_ID", maintainObject.UGO_IDs);
-        if (maintainObject.MR_MaintainContent != null) {
-            params.put("content", maintainObject.MR_MaintainContent);
+        params.put("type", inspectObject.MR_MaintainType);
+        params.put("date", inspectObject.MR_MaintainDate);
+        params.put("staff", inspectObject.MR_MaintainStaff);
+        params.put("UGO_ID", inspectObject.UGO_IDs);
+        if (inspectObject.MR_MaintainContent != null) {
+            params.put("content", inspectObject.MR_MaintainContent);
         }
 
         Map<String, Object> results = callMethod(Add_Maintain_Record, params);

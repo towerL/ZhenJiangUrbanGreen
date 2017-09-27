@@ -9,14 +9,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import com.nju.urbangreen.zhenjiangurbangreen.R;
-import com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseActivity;
-import com.nju.urbangreen.zhenjiangurbangreen.events.EventListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.inspectRecord.InspectListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.maintainRecord.MaintainListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.message.MessageListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.settings.SettingsActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.settings.SystemFileActivity;
-import com.nju.urbangreen.zhenjiangurbangreen.util.ActivityCollector;
 import com.nju.urbangreen.zhenjiangurbangreen.widget.TitleBarLayout;
 
 public class NaviActivity extends AppCompatActivity implements View.OnClickListener{
@@ -80,7 +77,8 @@ public class NaviActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.imgbtn_events_record:
-                intent = new Intent(NaviActivity.this, EventListActivity.class);
+                intent = new Intent(NaviActivity.this, InspectListActivity.class);
+                intent.putExtra("type","event");
                 startActivity(intent);
                 break;
             case R.id.imgbtn_maintain_record:

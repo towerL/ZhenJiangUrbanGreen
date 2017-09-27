@@ -1,13 +1,10 @@
-package com.nju.urbangreen.zhenjiangurbangreen.maintainRecord;
+package com.nju.urbangreen.zhenjiangurbangreen.inspectRecord;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.nju.urbangreen.zhenjiangurbangreen.R;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseItemViewHolder;
@@ -15,15 +12,15 @@ import com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseItemViewHolder;
 import java.util.List;
 
 /**
- * Created by tommy on 2017/8/17.
+ * Created by tommy on 2017/9/20.
  */
 
-public class MaintainListAdapter2 extends RecyclerView.Adapter<BaseItemViewHolder>{
-    private List<Maintain> maintainList;
+public class InspectListAdapter extends RecyclerView.Adapter<BaseItemViewHolder>{
+    private List<Inspect> inspectList;
 //    private BaseItemViewHolder viewHolder;
 
-    public MaintainListAdapter2(List<Maintain> maintainList) {
-        this.maintainList = maintainList;
+    public InspectListAdapter(List<Inspect> inspectList) {
+        this.inspectList = inspectList;
     }
 
     @Override
@@ -47,24 +44,22 @@ public class MaintainListAdapter2 extends RecyclerView.Adapter<BaseItemViewHolde
 
     @Override
     public void onBindViewHolder(BaseItemViewHolder viewHolder, int i) {
-        Maintain maintain = maintainList.get(i);
-        viewHolder.itemTitle.setText(maintain.MR_Code + "/" + maintain.MR_MaintainType);
-        viewHolder.itemContent.setText(maintain.MR_MaintainContent);
-
+        Inspect inspect = inspectList.get(i);
+        viewHolder.itemTitle.setText(inspect.getIR_Code() + "/" + inspect.getIR_Type());
+        viewHolder.itemContent.setText(inspect.getIR_Content());
     }
 
     @Override
     public int getItemCount() {
-        return maintainList.size();
+        return inspectList.size();
     }
 
     private void resolveClick(BaseItemViewHolder viewHolder, View view) {
         int position = viewHolder.getAdapterPosition();
-//        Toast.makeText(view.getContext(), position + "", Toast.LENGTH_SHORT).show();
-        Maintain maintain = maintainList.get(position);
+        Inspect inspect = inspectList.get(position);
 
-        Intent intent = new Intent(view.getContext(), MaintainRegisterActivity.class);
-        intent.putExtra("maintain_object", maintain);
+        Intent intent = new Intent(view.getContext(), InspectRegisterActivity.class);
+        intent.putExtra("inspect_object", inspect);
 
         view.getContext().startActivity(intent);
     }

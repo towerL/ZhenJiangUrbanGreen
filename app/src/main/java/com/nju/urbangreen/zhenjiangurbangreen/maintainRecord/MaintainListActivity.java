@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 public class MaintainListActivity extends BaseActivity {
 
     @BindView(R.id.floatingbtn_add_maintain)
-    public FloatingActionButton fbtnAddMaintain;//悬浮按钮
+    FloatingActionButton fbtnAddMaintain;//悬浮按钮
     @BindView(R.id.Toolbar)
     Toolbar toolbar;
     @BindView(R.id.material_search_view)
@@ -60,7 +60,7 @@ public class MaintainListActivity extends BaseActivity {
     LoadMoreFooterView swipeLoadMoreFooter;
 
     public static final int GET_REGISTER_RESULT = 1;
-    private MaintainListAdapter2 adapter2;
+    private MaintainListAdapter adapter;
     private List<Maintain> maintainList = new ArrayList<>();
     private int page = 2;
 
@@ -125,6 +125,7 @@ public class MaintainListActivity extends BaseActivity {
                 startActivityForResult(intent, GET_REGISTER_RESULT);
             }
         });
+
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -214,9 +215,13 @@ public class MaintainListActivity extends BaseActivity {
 
     //获得列表第一页数据
     private void getMaintainList(final Map<String, Object> query) {
+        page = 2;
+        swipeToLoadLayout.setLoadMoreEnabled(true);
+
         final ProgressDialog loading = new ProgressDialog(this);
         loading.setMessage("加载数据中，请稍候...");
         loading.show();
+
 
         new Thread(new Runnable() {
             @Override
@@ -264,7 +269,7 @@ public class MaintainListActivity extends BaseActivity {
                             findViewById(R.id.task_list_emptyview).setVisibility(View.VISIBLE);
                         }
                         loading.dismiss();
-                        adapter2.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                         swipeToLoadLayout.setRefreshing(false);
                     }
                 });
@@ -289,14 +294,17 @@ public class MaintainListActivity extends BaseActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            adapter2.notifyDataSetChanged();
+                            adapter.notifyDataSetChanged();
                             swipeToLoadLayout.setLoadingMore(false);
                             if (newMaintainList.size() < limit) {
                                 swipeToLoadLayout.setLoadMoreEnabled(false);
-                                Toast.makeText(MaintainListActivity.this, "加载完毕", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MaintainListActivity.this, "没有更多了", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
+                }else{
+                    swipeToLoadLayout.setLoadMoreEnabled(false);
+                    Toast.makeText(MaintainListActivity.this, "没有更多了", Toast.LENGTH_SHORT).show();
                 }
             }
         }).start();
@@ -310,9 +318,9 @@ public class MaintainListActivity extends BaseActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerMaintainList.getContext(),
                 linearLayoutManager.getOrientation());
         recyclerMaintainList.addItemDecoration(dividerItemDecoration);
-        adapter2 = new MaintainListAdapter2(maintainList);
-        recyclerMaintainList.setAdapter(adapter2);
-        adapter2.notifyDataSetChanged();
+        adapter = new MaintainListAdapter(maintainList);
+        recyclerMaintainList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 

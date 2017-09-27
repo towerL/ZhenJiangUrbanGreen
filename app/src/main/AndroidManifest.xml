@@ -60,18 +60,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".inspectRecord.InspectInfoActivity" />
+        <activity android:name=".inspectRecord.InspectRegisterActivity" />
         <activity android:name=".maintainRecord.MaintainRegisterActivity" />
-        <activity
-            android:name=".events.EventListActivity"
-            android:windowSoftInputMode="stateHidden">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
-        </activity>
         <activity android:name=".message.MessageListActivity">
 
             <!-- <intent-filter> -->
@@ -79,9 +69,6 @@
             <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".events.EventRegisterActivity"
-            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".attachments.AttachmentListActivity">
 
             <!-- <intent-filter> -->
@@ -96,9 +83,9 @@
         <activity android:name=".ugo.UgoListActivity" />
         <activity
             android:name=".ugo.SearchUgoActivity"
-            android:exported="true"></activity>
-        <activity android:name=".search.UGOInfoActivity"></activity>
-        <activity android:name=".map.SimpleMapActivity"></activity>
+            android:exported="true" />
+        <activity android:name=".search.UGOInfoActivity" />
+        <activity android:name=".map.SimpleMapActivity" />
         <activity android:name=".settings.SystemFileActivity">
 
             <!-- <intent-filter> -->
@@ -106,18 +93,19 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".maintainRecord.TestActivity"
-            android:exported="true"></activity>
 
-        <service android:name=".PollingService"
+        <service
+            android:name=".PollingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.nju.urbangreen.zhenjiangurbangreen.PollingService" />
             </intent-filter>
         </service>
-        <receiver android:name=".message.AlarmReceiver"/>
+
+        <receiver android:name=".message.AlarmReceiver" />
+
+        <activity android:name=".basisClass.BaseListActivity"></activity>
     </application>
 
 </manifest>

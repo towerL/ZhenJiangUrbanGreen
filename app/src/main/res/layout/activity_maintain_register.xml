@@ -8,13 +8,6 @@
     android:orientation="vertical"
     tools:context="com.nju.urbangreen.zhenjiangurbangreen.maintainRecord.MaintainRegisterActivity">
 
-    <!--<com.nju.urbangreen.zhenjiangurbangreen.widget.TitleBarLayout-->
-        <!--android:id="@+id/ly_maintainInfo_title_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/colorPrimary">-->
-
-    <!--</com.nju.urbangreen.zhenjiangurbangreen.widget.TitleBarLayout>-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/Toolbar"
         android:layout_width="match_parent"

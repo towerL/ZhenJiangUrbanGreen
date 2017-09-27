@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.nju.urbangreen.zhenjiangurbangreen.R;
 import com.nju.urbangreen.zhenjiangurbangreen.attachments.AttachmentListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseActivity;
+import com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseRegisterActivity;
+import com.nju.urbangreen.zhenjiangurbangreen.basisClass.Constants;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.GreenObject;
 import com.nju.urbangreen.zhenjiangurbangreen.ugo.UgoListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.util.ACache;
@@ -36,7 +38,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MaintainRegisterActivity extends BaseActivity {
+public class MaintainRegisterActivity extends BaseRegisterActivity {
 
     @BindView(R.id.tv_maintainInfo_ID)
     TextView tvMaintainID;
@@ -62,61 +64,26 @@ public class MaintainRegisterActivity extends BaseActivity {
     private String ugoIds;
     private String maintainId;
 
-    public static int CLICK_BACK_BUTTON = 0;
-    public static int CLICK_UPLOAD_BUTTON = 1;
-    private static final String TAG = "MaintainRegisterActivit";
+
+    private static final String TAG = "MaintainRegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Intent intent = getIntent();
-//        if (intent.getSerializableExtra("MaintainInfo") == null) {
-//            //todo add new Object
-////            myObject=new Maintain("保存时自动生成","MR201701030002");
-//        } else
-//            myObject = (Maintain) intent.getSerializableExtra("MaintainInfo");
         setContentView(R.layout.activity_maintain_register);
         ButterKnife.bind(this);
-//        tvMaintainID.setText(myObject.getID());
-//        tvMaintainCode.setText(myObject.getCode());
+
         initToolbar();
 
         ArrayList<String> dropdownList = new ArrayList<>();
         dropdownList.addAll(Arrays.asList(getResources().getStringArray(R.array.maintainTypeDropList)));
         dropdownMaintainType.setDropdownList(dropdownList);
-//        dropdownMaintainType.setText(myObject.getMaintainType());
 
         initDatePicker();
         getMaintainObject();
         upload();
 
-//        etMaintainStaff.setText(myObject.getMaintainStaff());
-//        etMaintainStaff.addTextChangedListener(new myTextWatcher(etMaintainStaff));
-//        etMaintainCompany.setText(myObject.getCompanyID());
-//        etMaintainContent.setText(myObject.getContent());
-//        tvLoggerID.setText(myObject.getLoggerPID());
-//        tvLogTime.setText(myObject.getLogTime());
-//        tvLasEditorPID.setText(myObject.getLastEditorPID());
-
-//        //初始化标题栏
-//        titleBarLayout.setTitleText("养护记录登记");
-//        titleBarLayout.setBtnBackClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //隐藏输入键盘
-//                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
-//                processBack();
-//            }
-//        });
-//        titleBarLayout.setBtnSelfDefBkg(R.drawable.ic_btn_self_def_up);
-//        titleBarLayout.setBtnSelfDefClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                updateState = 1;
-//            }
-//        });
     }
 
     private void getMaintainObject() {
@@ -131,13 +98,6 @@ public class MaintainRegisterActivity extends BaseActivity {
             etMaintainContent.setText(maintainObject.MR_MaintainContent);
             maintainId = maintainObject.MR_ID;
         }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar_maintain, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -162,7 +122,7 @@ public class MaintainRegisterActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        validateEmpty(CLICK_BACK_BUTTON);
+        validateEmpty(Constants.CLICK_BACK_BUTTON);
     }
 
     private void initToolbar() {
@@ -206,7 +166,7 @@ public class MaintainRegisterActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 final String[] errMsg = new String[1];
-                if (validateEmpty(CLICK_UPLOAD_BUTTON)) {
+                if (validateEmpty(Constants.CLICK_UPLOAD_BUTTON)) {
                     outputObject();
 
                     new Thread(new Runnable() {
@@ -285,7 +245,7 @@ public class MaintainRegisterActivity extends BaseActivity {
 
     //必填项为空错误提示
     private void showPrompt(int flag) {
-        if (flag == CLICK_BACK_BUTTON) {
+        if (flag == Constants.CLICK_BACK_BUTTON) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MaintainRegisterActivity.this);
             builder.setTitle("温馨提示");
             builder.setMessage("有必填项为空，返回后相关信息不会保存");

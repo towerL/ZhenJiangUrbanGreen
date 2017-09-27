@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.nju.urbangreen.zhenjiangurbangreen.inspectRecord.InspectListActivity">
+    tools:context="com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseListActivity">
 
     <include layout="@layout/toolbar" />
 
@@ -27,8 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:entries="@array/inspectType" />
+                android:layout_weight="1" />
 
             <Spinner
                 android:id="@+id/spinner2"
@@ -37,8 +36,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:entries="@array/maintainDate" />
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/spinner3"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -50,7 +57,7 @@
             <include layout="@layout/recycler_loadmore_view"/>
             <include layout="@layout/task_list_emptyview" />
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingbtn_add_inspect"
+                android:id="@+id/floatingbtn_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
