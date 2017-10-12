@@ -62,6 +62,8 @@
 
         <activity android:name=".inspectRecord.InspectRegisterActivity" />
         <activity android:name=".maintainRecord.MaintainRegisterActivity" />
+        <activity android:name=".events.EventRegisterActivity" />
+        <activity android:name=".events.ActivityRegisterActivity" />
         <activity android:name=".message.MessageListActivity">
 
             <!-- <intent-filter> -->

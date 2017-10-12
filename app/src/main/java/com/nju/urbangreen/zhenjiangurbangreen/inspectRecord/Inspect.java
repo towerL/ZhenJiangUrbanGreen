@@ -1,7 +1,6 @@
 package com.nju.urbangreen.zhenjiangurbangreen.inspectRecord;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by lxs on 2016/11/20.
@@ -14,6 +13,14 @@ public class Inspect implements Serializable{
     private String IR_InspectDate;
     private String IR_CompanyID;
     private String IR_Inspector;
+    private String IR_Location;
+    private String IR_Score;
+    private String IR_Content;
+    private String IR_InspectOpinion;
+    private String IR_LoggerPID;
+    private String IR_LogTime;
+    private String IR_LastEditorPID;
+    private String UGO_IDs;
 
     public String getIR_Location() {
         return IR_Location;
@@ -23,45 +30,12 @@ public class Inspect implements Serializable{
         this.IR_Location = IR_Location;
     }
 
-    private String IR_Location;
-    private String IR_Score;
-    private String IR_Content;
-    private String IR_InspectOpinion;
-    private String IR_LoggerPID;
-    private String IR_LogTime;
-    private String IR_LastEditorPID;
-
     public String getUGO_IDs() {
         return UGO_IDs;
     }
 
     public void setUGO_IDs(String UGO_IDs) {
         this.UGO_IDs = UGO_IDs;
-    }
-
-    private String UGO_IDs;
-
-    public Inspect() {
-    }
-
-    public Inspect(String IR_ID, String IR_Code, String IR_Type, String IR_InspectDate, String IR_CompanyID, String IR_Inspector, String IR_Score, String IR_Content, String IR_InspectOpinion, String IR_LoggerPID, String IR_LogTime, String IR_LastEditorPID) {
-        this.IR_ID = IR_ID;
-        this.IR_Code = IR_Code;
-        this.IR_Type = IR_Type;
-        this.IR_InspectDate = IR_InspectDate;
-        this.IR_CompanyID = IR_CompanyID;
-        this.IR_Inspector = IR_Inspector;
-        this.IR_Score = IR_Score;
-        this.IR_Content = IR_Content;
-        this.IR_InspectOpinion = IR_InspectOpinion;
-        this.IR_LoggerPID = IR_LoggerPID;
-        this.IR_LogTime = IR_LogTime;
-        this.IR_LastEditorPID = IR_LastEditorPID;
-    }
-
-    public Inspect(String IR_ID, String IR_Code) {
-        this.IR_ID = IR_ID;
-        this.IR_Code = IR_Code;
     }
 
     public String getIR_ID() {

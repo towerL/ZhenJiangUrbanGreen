@@ -1,23 +1,20 @@
 package com.nju.urbangreen.zhenjiangurbangreen.settings;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import com.nju.urbangreen.zhenjiangurbangreen.R;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseActivity;
@@ -30,6 +27,9 @@ import com.nju.urbangreen.zhenjiangurbangreen.util.WebServiceUtils;
 import com.nju.urbangreen.zhenjiangurbangreen.widget.TitleBarLayout;
 
 import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SettingsActivity extends BaseActivity {
 
@@ -209,9 +209,10 @@ public class SettingsActivity extends BaseActivity {
                         ActivityCollector.finishAll();
                         SPUtils.remove("username");
                         SPUtils.remove("password");
+                        SPUtils.put("RememberPassword",false);
                         Intent intent1 = new Intent(SettingsActivity.this,LoginActivity.class);
                         startActivity(intent1);
-                        finish();
+//                        finish();
 
                     }
                 });

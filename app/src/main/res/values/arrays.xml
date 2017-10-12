@@ -29,7 +29,7 @@
         <item>否</item>
     </string-array>
     <string-array name="eventType">
-        <item>事件类型</item>
+        <item>类型</item>
         <item>自然灾害</item>
         <item>病虫灾害</item>
         <item>人为事故</item>

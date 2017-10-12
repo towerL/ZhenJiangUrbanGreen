@@ -226,7 +226,6 @@ public class EventListActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
                     multiQuery.put("is_activity", false);
-
                 } else {
                     multiQuery.put("is_activity", true);
                 }
@@ -350,9 +349,19 @@ public class EventListActivity extends BaseActivity {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent i = new Intent(EventListActivity.this , EventRegisterActivity.class);
-                startActivity(i);
+                String title = item.getTitle().toString();
+                switch (item.getItemId())
+                {
+                    case R.id.action_event:
+                        Intent i_event = new Intent(EventListActivity.this , EventRegisterActivity.class);
+                        startActivity(i_event);
+                        break;
+                    case R.id.action_activity:
+                        Intent i_activity = new Intent(EventListActivity.this , ActivityRegisterActivity.class);
+                        startActivity(i_activity);
+                        break;
 
+                }
                 return false;
             }
         });

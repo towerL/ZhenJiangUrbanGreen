@@ -1,9 +1,6 @@
 package com.nju.urbangreen.zhenjiangurbangreen.events;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by ljy on 2017/9/27.
@@ -11,6 +8,7 @@ import java.util.Date;
 //事件记录类
 public class OneEvent implements Serializable{
 
+    private String UGE_ID;
     private String UGE_Code;
     private String UGE_DamageDegree;
     private String UGE_Name;
@@ -42,6 +40,8 @@ public class OneEvent implements Serializable{
     private String UGE_LoggerName;
     private String UGE_LastEditorName;
     private String UGE_ConcludeName;
+    private String UGO_IDs;
+
 
 
 
@@ -49,14 +49,15 @@ public class OneEvent implements Serializable{
     private String reason;
     private int state;//0 :未提交；1 :已提交
 
-    public OneEvent(String UGE_Code, String UGE_DamageDegree, String UGE_Name, boolean UGE_EventOrActivity, String UGE_Type,
+    public OneEvent(String UGE_ID,String UGE_Code, String UGE_DamageDegree, String UGE_Name, boolean UGE_EventOrActivity, String UGE_Type,
                     String UGE_Description, String UGE_Location, String UGE_Time, String UGE_Endtime, String UGE_Reason,
                     String UGE_LoggerPID, String UGE_LogTime, String UGE_LastEditorPID, String UGE_LastEditTime,
                     boolean UGE_IsConcluded, String UGE_ConcludePID, String UGE_ConcludeTime, String UGE_ConcludeDescription,
                     String UGE_TotalFee, String UGE_LostFee, String UGE_Compensation, String UGE_RelevantPerson,
                     String UGE_RelevantLicensePlate, String UGE_RelevantContact, String UGE_RelevantCompany, String UGE_RelevantAddress,
-                    String UGE_RelevantDescription, String UGE_LastStateID, String UGE_LoggerName, String UGE_LastEditorName, String UGE_ConcludeName)
+                    String UGE_RelevantDescription, String UGE_LastStateID, String UGE_LoggerName, String UGE_LastEditorName, String UGE_ConcludeName,String UGO_IDs)
     {
+        this.UGE_ID = UGE_ID;
         this.UGE_Code = UGE_Code;
         this.UGE_DamageDegree = UGE_DamageDegree;
         this.UGE_Name = UGE_Name;
@@ -88,9 +89,13 @@ public class OneEvent implements Serializable{
         this.UGE_LoggerName = UGE_LoggerName;
         this.UGE_LastEditorName = UGE_LastEditorName;
         this.UGE_ConcludeName = UGE_ConcludeName;
+        this.UGO_IDs=UGO_IDs;
     }
     public OneEvent(){}
 
+    public String getUGE_ID() {
+        return UGE_ID;
+    }
     public String getUGE_Code() {
         return UGE_Code;
     }
@@ -216,6 +221,9 @@ public class OneEvent implements Serializable{
         return UGE_RelevantAddress;
     }
 
+    public void setUGE_ID(String UGE_ID) {
+        this.UGE_ID = UGE_ID;
+    }
     public void setUGE_Code(String UGE_Code) {
         this.UGE_Code = UGE_Code;
     }
@@ -354,6 +362,14 @@ public class OneEvent implements Serializable{
 
     public void setRegistrar(String registrar) {
         this.registrar = registrar;
+    }
+    public String getUGO_IDs() {
+        return UGO_IDs;
+    }
+
+    public void setUGO_IDs(String UGO_IDs) {
+
+        this.UGO_IDs = UGO_IDs;
     }
 
 }

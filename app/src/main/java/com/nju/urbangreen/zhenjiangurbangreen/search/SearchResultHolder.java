@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.nju.urbangreen.zhenjiangurbangreen.R;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.GreenObject;
+import com.nju.urbangreen.zhenjiangurbangreen.events.EventListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.inspectRecord.InspectListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.maintainRecord.MaintainListActivity;
 
@@ -66,15 +67,15 @@ public class SearchResultHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MaintainListActivity.class);
-//                intent.putExtra("UGO_Ucode", obj.getID());
+                intent.putExtra("UGO_Ucode", obj.UGO_ID);  //名字叫code实际上是id
                 v.getContext().startActivity(intent);
             }
         });
         btnEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), InspectListActivity.class);
-//                intent.putExtra("UGO_Ucode", obj.getID());
+                Intent intent = new Intent(v.getContext(), EventListActivity.class);
+                intent.putExtra("UGO_Ucode", obj.UGO_ID);
                 v.getContext().startActivity(intent);
             }
         });
@@ -82,7 +83,7 @@ public class SearchResultHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), InspectListActivity.class);
-//                intent.putExtra("UGO_Ucode", obj.getID());
+                intent.putExtra("UGO_Ucode", obj.UGO_ID);
                 v.getContext().startActivity(intent);
             }
         });

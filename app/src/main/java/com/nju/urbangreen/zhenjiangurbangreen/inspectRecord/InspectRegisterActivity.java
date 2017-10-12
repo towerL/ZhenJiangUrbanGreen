@@ -3,16 +3,13 @@ package com.nju.urbangreen.zhenjiangurbangreen.inspectRecord;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -208,17 +205,28 @@ public class InspectRegisterActivity extends BaseRegisterActivity {
         });
     }
 
-
     private void outputObject() {
         inspectObject = new Inspect();
-
         inspectObject.setIR_Type(droplistInspectInfoType.getText());
         inspectObject.setIR_InspectDate(etInspectInfoDate.getText().toString());
         inspectObject.setIR_ID(tvInspectInfoID.getText().toString());
-        if (etInspectInfoContent.getText() != null) {
+        inspectObject.setUGO_IDs(getUGOIDs());
+        Log.d("ira", "outputObject: "+getUGOIDs());
+        if(etInspectInfoOpinion.getText()!=null){
+            inspectObject.setIR_InspectOpinion(etInspectInfoOpinion.getText().toString());
+        }
+        if(etInspectInfoScore.getText()!=null){
+            inspectObject.setIR_Score(etInspectInfoScore.getText().toString());
+        }
+        if(etInspectInfoStaff.getText()!=null){
+            inspectObject.setIR_Inspector(etInspectInfoStaff.getText().toString());
+        }
+        if(etInspectInfoLocation.getText()!=null){
+            inspectObject.setIR_Location(etInspectInfoLocation.getText().toString());
+        }
+        if(etInspectInfoContent.getText()!=null){
             inspectObject.setIR_Content(etInspectInfoContent.getText().toString());
         }
-        inspectObject.setUGO_IDs(getUGOIDs());
     }
 
 

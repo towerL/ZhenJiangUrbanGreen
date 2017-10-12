@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.nju.urbangreen.zhenjiangurbangreen.events.EventRegisterActivity">
+    tools:context="com.nju.urbangreen.zhenjiangurbangreen.events.ActivityRegisterActivity">
 
     <include layout="@layout/toolbar"></include>
 
     <ScrollView
-        android:id="@+id/ly_events_register_scroll"
+        android:id="@+id/ly_activity_register_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <TableLayout
-                android:id="@+id/ly_events_register_table"
+                android:id="@+id/ly_activity_register_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -35,10 +35,10 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件编号" />
+                        android:text="活动编号" />
 
                     <TextView
-                        android:id="@+id/edit_event_register_id"
+                        android:id="@+id/edit_activity_register_id"
                         style="@style/RecordItemContent" />
                 </TableRow>
 
@@ -46,10 +46,10 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件名称" />
+                        android:text="活动名称" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_name"
+                        android:id="@+id/edit_activity_register_name"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -58,10 +58,10 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件类型" />
+                        android:text="活动类型" />
 
                     <com.nju.urbangreen.zhenjiangurbangreen.widget.DropdownEditText
-                        android:id="@+id/droplist_event_register_type"
+                        android:id="@+id/droplist_activity_register_type"
                         android:layout_width="wrap_content"></com.nju.urbangreen.zhenjiangurbangreen.widget.DropdownEditText>
                 </TableRow>
 
@@ -69,10 +69,10 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件地点" />
+                        android:text="活动地点" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_location"
+                        android:id="@+id/edit_activity_register_location"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -81,10 +81,10 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件时间" />
+                        android:text="活动时间" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_time"
+                        android:id="@+id/edit_activity_register_time"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext"
                         android:clickable="true"
@@ -100,7 +100,7 @@
                         android:text="伤害程度" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_damage_degree"
+                        android:id="@+id/edit_activity_register_damage_degree"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -112,7 +112,7 @@
                         android:text="损失总价(元)" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_lost_fee"
+                        android:id="@+id/edit_activity_register_lost_fee"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext"
                         android:digits="0123456789."
@@ -126,7 +126,7 @@
                         android:text="实际赔偿(元)" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_compensation"
+                        android:id="@+id/edit_activity_register_compensation"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext"
                         android:digits="0123456789."
@@ -137,10 +137,10 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件相关方" />
+                        android:text="活动相关方" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_relevant_person"
+                        android:id="@+id/edit_activity_register_relevant_person"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -152,7 +152,7 @@
                         android:text="相关方车牌号" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_relevant_license_plate"
+                        android:id="@+id/edit_activity_register_relevant_license_plate"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -164,7 +164,7 @@
                         android:text="相关方所属单位" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_relevant_company"
+                        android:id="@+id/edit_activity_register_relevant_company"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -176,7 +176,7 @@
                         android:text="相关方联系方式" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_relevant_contact"
+                        android:id="@+id/edit_activity_register_relevant_contact"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext"
                         android:inputType="phone" />
@@ -189,7 +189,7 @@
                         android:text="相关方通讯地址" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_relevant_address"
+                        android:id="@+id/edit_activity_register_relevant_address"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -198,10 +198,10 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件描述" />
+                        android:text="活动描述" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_description"
+                        android:id="@+id/edit_activity_register_description"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -210,10 +210,10 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件原因" />
+                        android:text="活动原因" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_reason"
+                        android:id="@+id/edit_activity_register_reason"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -225,14 +225,14 @@
                         android:text="相关方其他说明" />
 
                     <EditText
-                        android:id="@+id/edit_event_register_relevant_description"
+                        android:id="@+id/edit_activity_register_relevant_description"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
             </TableLayout>
             <android.support.v7.widget.AppCompatButton
                 android:background="@drawable/button_shape"
-                android:id="@+id/btn_event_register_submit"
+                android:id="@+id/btn_activity_register_submit"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="32dp"

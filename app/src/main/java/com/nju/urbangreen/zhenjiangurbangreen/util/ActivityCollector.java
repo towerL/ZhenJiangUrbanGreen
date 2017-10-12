@@ -25,5 +25,6 @@ public class ActivityCollector {
                 activity.finish();
             }
         }
+        activityList.clear();
     }
 }

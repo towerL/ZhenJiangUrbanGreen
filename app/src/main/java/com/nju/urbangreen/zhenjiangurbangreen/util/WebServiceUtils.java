@@ -64,6 +64,8 @@ public class WebServiceUtils {
     public static final String Get_Inspect_Record_Ugo = "GetInspectRecordUGO";
     public static final String Add_Inspect_Record = "AddInspectRecord";
     public static final String Add_Maintain_Record = "AddMaintainRecord";
+    public static final String Add_Event = "AddEvent";
+    public static final String Add_Activity = "AddActivity";
     public static final String Get_Event_Record_UGO = "GetEventUGO";
     public static final String Get_UGO_Info_Except_ST = "GetUGOInfoExceptST";//ST表示行道树
     public static final String Get_Near_Street_Tree = "GetNearStreetTree";
@@ -83,6 +85,9 @@ public class WebServiceUtils {
     public static final String Update_Message = "UpdateMessage";
     public static final String Update_Maintain_Record = "UpdateMaintainRecord";
     public static final String Update_Inspect_Record = "UpdateInspectRecord";
+    public static final String Update_Event = "UpdateEvent";
+
+
     public static final String Delete_Message = "DeleteMessage";
     /**
      * 登录名
@@ -488,6 +493,68 @@ public class WebServiceUtils {
         }
 
     }
+    public static boolean UpdateEvent(String[] errorMessage, OneEvent eventObject) {
+        if (is_offline()) {
+            errorMessage[0] = "网络连接断开，请稍后再试";
+        }
+        Map<String, Object> params = new HashMap<>();
+        params.put("id",  eventObject.getUGE_ID());
+        params.put("title", eventObject.getUGE_Name());
+        params.put("type", eventObject.getUGE_Type());
+        params.put("location", eventObject.getUGE_Location());
+        params.put("date", eventObject.getUGE_Time());
+        params.put("UGO_ID",eventObject.getUGO_IDs());
+
+        //添加绿化对象id,逗号隔开
+
+
+        if (eventObject.getUGE_DamageDegree() != null) {
+            params.put("damage_degree", eventObject.getUGE_DamageDegree());
+        }
+        if (eventObject.getUGE_LostFee() != null) {
+            params.put("lost_fee", eventObject.getUGE_LostFee());
+        }
+        if (eventObject.getUGE_Compensation() != null) {
+            params.put("compensation", eventObject.getUGE_Compensation());
+        }
+        if (eventObject.getUGE_RelevantPerson() != null) {
+            params.put("rela_person", eventObject.getUGE_RelevantPerson());
+        }
+        if (eventObject.getUGE_RelevantLicensePlate() != null) {
+            params.put("rela_no", eventObject.getUGE_RelevantLicensePlate());
+        }
+        if (eventObject.getUGE_RelevantContact() != null) {
+            params.put("rela_contact", eventObject.getUGE_RelevantContact());
+        }
+        if (eventObject.getUGE_RelevantCompany() != null) {
+            params.put("rela_company", eventObject.getUGE_RelevantCompany());
+        }
+        if (eventObject.getUGE_RelevantAddress() != null) {
+            params.put("rela_address", eventObject.getUGE_RelevantAddress());
+        }
+        if (eventObject.getUGE_Description() != null) {
+            params.put("desc", eventObject.getUGE_Description());
+        }
+        if (eventObject.getUGE_Reason() != null) {
+            params.put("reason", eventObject.getUGE_Reason());
+        }
+        if (eventObject.getUGE_RelevantDescription() != null) {
+            params.put("rela_desc", eventObject.getUGE_RelevantDescription());
+        }
+
+        Map<String, Object> results = callMethod(Update_Event, params);
+        if (Integer.parseInt(results.get(KEY_SUCCEED).toString()) == RESULT_SUCCEED) {
+            return true;
+        } else {
+            if (errorMessage != null && results.get(KEY_ERRMESSAGE) != null) {
+                errorMessage[0] = results.get(KEY_ERRMESSAGE).toString();
+                Log.i("错误消息", "checkUpdate: " + errorMessage[0]);
+            }
+            return false;
+        }
+    }
+
+
 
 
     public static boolean AddMaintainRecord(String[] errorMessage,Maintain inspectObject) {
@@ -515,6 +582,124 @@ public class WebServiceUtils {
         }
 
     }
+
+    public static boolean AddEvent(String[] errorMessage,OneEvent eventObject) {
+        if (is_offline()) {
+            errorMessage[0] = "网络连接断开，请稍后再试";
+        }
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("title", eventObject.getUGE_Name());
+        params.put("type", eventObject.getUGE_Type());
+        params.put("location", eventObject.getUGE_Location());
+        params.put("date", eventObject.getUGE_Time());
+        params.put("UGO_ID",eventObject.getUGO_IDs());
+        //添加绿化对象id
+        if (eventObject.getUGE_DamageDegree() != null) {
+            params.put("damage_degree", eventObject.getUGE_DamageDegree());
+        }
+        if (eventObject.getUGE_LostFee() != null) {
+            params.put("lost_fee", eventObject.getUGE_LostFee());
+        }
+        if (eventObject.getUGE_Compensation() != null) {
+            params.put("compensation", eventObject.getUGE_Compensation());
+        }
+        if (eventObject.getUGE_RelevantPerson() != null) {
+            params.put("rela_person", eventObject.getUGE_RelevantPerson());
+        }
+        if (eventObject.getUGE_RelevantLicensePlate() != null) {
+            params.put("rela_no", eventObject.getUGE_RelevantLicensePlate());
+        }
+        if (eventObject.getUGE_RelevantContact() != null) {
+            params.put("rela_contact", eventObject.getUGE_RelevantContact());
+        }
+        if (eventObject.getUGE_RelevantCompany() != null) {
+            params.put("rela_company", eventObject.getUGE_RelevantCompany());
+        }
+        if (eventObject.getUGE_RelevantAddress() != null) {
+            params.put("rela_address", eventObject.getUGE_RelevantAddress());
+        }
+        if (eventObject.getUGE_Description() != null) {
+            params.put("desc", eventObject.getUGE_Description());
+        }
+        if (eventObject.getUGE_Reason() != null) {
+            params.put("reason", eventObject.getUGE_Reason());
+        }
+        if (eventObject.getUGE_RelevantDescription() != null) {
+            params.put("rela_desc", eventObject.getUGE_RelevantDescription());
+        }
+
+        Map<String, Object> results = callMethod(Add_Event, params);
+        if (Integer.parseInt(results.get(KEY_SUCCEED).toString()) == RESULT_SUCCEED) {
+            return true;
+        } else {
+            if (errorMessage != null && results.get(KEY_ERRMESSAGE) != null) {
+                errorMessage[0] = results.get(KEY_ERRMESSAGE).toString();
+                Log.i("错误消息", "checkUpdate: " + errorMessage[0]);
+            }
+            return false;
+        }
+
+    }
+    public static boolean AddActivity(String[] errorMessage,OneEvent eventObject) {
+        if (is_offline()) {
+            errorMessage[0] = "网络连接断开，请稍后再试";
+        }
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("title", eventObject.getUGE_Name());
+        params.put("type", eventObject.getUGE_Type());
+        params.put("location", eventObject.getUGE_Location());
+        params.put("date", eventObject.getUGE_Time());
+        params.put("UGO_ID",eventObject.getUGO_IDs());
+        //添加绿化对象id
+        if (eventObject.getUGE_DamageDegree() != null) {
+            params.put("damage_degree", eventObject.getUGE_DamageDegree());
+        }
+        if (eventObject.getUGE_LostFee() != null) {
+            params.put("lost_fee", eventObject.getUGE_LostFee());
+        }
+        if (eventObject.getUGE_Compensation() != null) {
+            params.put("compensation", eventObject.getUGE_Compensation());
+        }
+        if (eventObject.getUGE_RelevantPerson() != null) {
+            params.put("rela_person", eventObject.getUGE_RelevantPerson());
+        }
+        if (eventObject.getUGE_RelevantLicensePlate() != null) {
+            params.put("rela_no", eventObject.getUGE_RelevantLicensePlate());
+        }
+        if (eventObject.getUGE_RelevantContact() != null) {
+            params.put("rela_contact", eventObject.getUGE_RelevantContact());
+        }
+        if (eventObject.getUGE_RelevantCompany() != null) {
+            params.put("rela_company", eventObject.getUGE_RelevantCompany());
+        }
+        if (eventObject.getUGE_RelevantAddress() != null) {
+            params.put("rela_address", eventObject.getUGE_RelevantAddress());
+        }
+        if (eventObject.getUGE_Description() != null) {
+            params.put("desc", eventObject.getUGE_Description());
+        }
+        if (eventObject.getUGE_Reason() != null) {
+            params.put("reason", eventObject.getUGE_Reason());
+        }
+        if (eventObject.getUGE_RelevantDescription() != null) {
+            params.put("rela_desc", eventObject.getUGE_RelevantDescription());
+        }
+
+        Map<String, Object> results = callMethod(Add_Activity, params);
+        if (Integer.parseInt(results.get(KEY_SUCCEED).toString()) == RESULT_SUCCEED) {
+            return true;
+        } else {
+            if (errorMessage != null && results.get(KEY_ERRMESSAGE) != null) {
+                errorMessage[0] = results.get(KEY_ERRMESSAGE).toString();
+                Log.i("错误消息", "checkUpdate: " + errorMessage[0]);
+            }
+            return false;
+        }
+
+    }
+
 
     public static List<GreenObject> getUGOInfoExceptST(String[] errorMessage) {
         if (CacheUtil.hasUGOs()) {

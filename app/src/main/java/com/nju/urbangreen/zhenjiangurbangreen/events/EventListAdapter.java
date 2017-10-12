@@ -56,13 +56,17 @@ public class EventListAdapter extends RecyclerView.Adapter<BaseItemViewHolder>{
     }
 
     private void resolveClick(BaseItemViewHolder viewHolder, View view) {
+        Intent intent;
         int position = viewHolder.getAdapterPosition();
 //        Toast.makeText(view.getContext(), position + "", Toast.LENGTH_SHORT).show();
         OneEvent oneEvent = eventList.get(position);
+        if(!oneEvent.isUGE_EventOrActivity()){
+             intent = new Intent(view.getContext(), EventRegisterActivity.class);
+        }else {
+            intent = new Intent(view.getContext(), ActivityRegisterActivity.class);
+        }
 
-        Intent intent = new Intent(view.getContext(), EventRegisterActivity.class);
         intent.putExtra("event_object", oneEvent);
-
         view.getContext().startActivity(intent);
     }
 }

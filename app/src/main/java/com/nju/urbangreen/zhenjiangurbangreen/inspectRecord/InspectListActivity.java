@@ -8,7 +8,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,6 +59,7 @@ public class InspectListActivity extends BaseActivity {
     private InspectListAdapter adapter;
     private List<Inspect> inspectList = new ArrayList<>();
     private int page = 2;
+    private String id;
     final Map<String, Object> multiQuery = new HashMap<>();
 
 
@@ -70,12 +70,16 @@ public class InspectListActivity extends BaseActivity {
         ButterKnife.bind(this);
         initViews();
         initRecyclerView();
+        Intent intent = getIntent();
+        id = intent.getStringExtra("UGO_Ucode");
+//        Log.d("ira",id);
         getInspectList(multiQuery);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        getInspectList(multiQuery);
         CacheUtil.removeRelatedUgos();
     }
 
@@ -196,6 +200,11 @@ public class InspectListActivity extends BaseActivity {
                 String[] errMsg = new String[1];
                 query.put("page", 1);
                 query.put("limit", 8);
+
+                if(id != ""){
+                    query.put("UGO_ID", id);
+                }
+
                 final List<Inspect> tempList = WebServiceUtils.getInspectRecord(query, errMsg);
                 if (tempList != null) {
                     inspectList.clear();
@@ -208,6 +217,9 @@ public class InspectListActivity extends BaseActivity {
                         if(tempList!=null){
 
                             findViewById(R.id.task_list_emptyview).setVisibility(View.INVISIBLE);
+                            if(tempList.size() < 8){
+                                swipeToLoadLayout.setLoadMoreEnabled(false);
+                            }
                         }
                         if(tempList==null){
 
@@ -231,6 +243,11 @@ public class InspectListActivity extends BaseActivity {
                 String[] errMsg = new String[1];
                 query.put("page", page);
                 query.put("limit", limit);
+
+                if(id != ""){
+                    query.put("UGO_ID", id);
+                }
+
                 final List<Inspect> newInspectList = WebServiceUtils.getInspectRecord(query, errMsg);
                 if (newInspectList != null) {
                     inspectList.addAll(newInspectList);

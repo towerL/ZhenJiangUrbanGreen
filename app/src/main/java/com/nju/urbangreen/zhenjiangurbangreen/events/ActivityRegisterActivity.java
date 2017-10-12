@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -22,12 +21,10 @@ import com.nju.urbangreen.zhenjiangurbangreen.attachments.AttachmentListActivity
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseRegisterActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.Constants;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.GreenObject;
-import com.nju.urbangreen.zhenjiangurbangreen.events.OneEvent;
 import com.nju.urbangreen.zhenjiangurbangreen.ugo.UgoListActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.util.CacheUtil;
 import com.nju.urbangreen.zhenjiangurbangreen.util.WebServiceUtils;
 import com.nju.urbangreen.zhenjiangurbangreen.widget.DropdownEditText;
-import com.nju.urbangreen.zhenjiangurbangreen.widget.TitleBarLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,45 +35,45 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EventRegisterActivity extends BaseRegisterActivity {
-    @BindView(R.id.ly_events_register_table)
+public class ActivityRegisterActivity extends BaseRegisterActivity {
+    @BindView(R.id.ly_activity_register_table)
     TableLayout lyEventInfoTable;
     @BindView(R.id.Toolbar)
     Toolbar toolbar;
-    @BindView(R.id.edit_event_register_id)
+    @BindView(R.id.edit_activity_register_id)
     public TextView tvId;
-    @BindView(R.id.edit_event_register_name)
+    @BindView(R.id.edit_activity_register_name)
     public EditText etName;
-    @BindView(R.id.droplist_event_register_type)
+    @BindView(R.id.droplist_activity_register_type)
     public DropdownEditText dropdownEventType;//事件类型选择的可编辑下拉列表，（已封装，可复用）
-    @BindView(R.id.edit_event_register_location)
+    @BindView(R.id.edit_activity_register_location)
     public EditText etLocation;
-    @BindView(R.id.edit_event_register_time)
+    @BindView(R.id.edit_activity_register_time)
     public EditText etDateSelect;//日期选择编辑框
-    @BindView(R.id.edit_event_register_damage_degree)
+    @BindView(R.id.edit_activity_register_damage_degree)
     public EditText etDamageDegree;
-    @BindView(R.id.edit_event_register_lost_fee)
+    @BindView(R.id.edit_activity_register_lost_fee)
     public EditText etLostFee;
-    @BindView(R.id.edit_event_register_compensation)
+    @BindView(R.id.edit_activity_register_compensation)
     public EditText etCompensation;
-    @BindView(R.id.edit_event_register_relevant_person)
+    @BindView(R.id.edit_activity_register_relevant_person)
     public EditText etRelevantPerson;
-    @BindView(R.id.edit_event_register_relevant_license_plate)
+    @BindView(R.id.edit_activity_register_relevant_license_plate)
     public EditText etRelevantLicensePlate;
-    @BindView(R.id.edit_event_register_relevant_contact)
+    @BindView(R.id.edit_activity_register_relevant_contact)
     public EditText etRelevantContact;
-    @BindView(R.id.edit_event_register_relevant_company)
+    @BindView(R.id.edit_activity_register_relevant_company)
     public EditText etRelevantCompany;
-    @BindView(R.id.edit_event_register_relevant_address)
+    @BindView(R.id.edit_activity_register_relevant_address)
     public EditText etRelevantAddress;
-    @BindView(R.id.edit_event_register_description)
+    @BindView(R.id.edit_activity_register_description)
     public EditText etDescription;
-    @BindView(R.id.edit_event_register_reason)
+    @BindView(R.id.edit_activity_register_reason)
     public EditText etReason;
-    @BindView(R.id.edit_event_register_relevant_description)
+    @BindView(R.id.edit_activity_register_relevant_description)
     public EditText etRelevantDescription;
 
-    @BindView(R.id.btn_event_register_submit)
+    @BindView(R.id.btn_activity_register_submit)
     AppCompatButton btnEventRegisterSubmit;
 
 
@@ -96,7 +93,7 @@ public class EventRegisterActivity extends BaseRegisterActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_event_register);
+        setContentView(R.layout.activity_activity_register);
         ButterKnife.bind(this);
         initToolbar();
         ArrayList<String> dropdownList = new ArrayList<>();
@@ -138,13 +135,13 @@ public class EventRegisterActivity extends BaseRegisterActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.attachment:
-                Intent intent = new Intent(EventRegisterActivity.this, AttachmentListActivity.class);
+                Intent intent = new Intent(ActivityRegisterActivity.this, AttachmentListActivity.class);
                 if (eventId != null)
                     intent.putExtra("id", eventId);
                 startActivity(intent);
                 break;
             case R.id.greenObjects:
-                Intent intent2 = new Intent(EventRegisterActivity.this, UgoListActivity.class);
+                Intent intent2 = new Intent(ActivityRegisterActivity.this, UgoListActivity.class);
                 if (eventId != null)
                     intent2.putExtra("id", eventId);
                 intent2.putExtra("activity","event");
@@ -161,7 +158,7 @@ public class EventRegisterActivity extends BaseRegisterActivity {
     }
 
     private void initToolbar() {
-        toolbar.setTitle("事件登记");
+        toolbar.setTitle("活动登记");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -210,7 +207,7 @@ public class EventRegisterActivity extends BaseRegisterActivity {
                             final Boolean res;
                             if (tvId.getText().toString()== "") {
                                // eventObject.setUGE_EventOrActivity(false);//false是事件，true是活动
-                                res = WebServiceUtils.AddEvent(errMsg, eventObject);
+                                res = WebServiceUtils.AddActivity(errMsg, eventObject);
                             } else {
                                 res = WebServiceUtils.UpdateEvent(errMsg, eventObject);
                             }
@@ -219,13 +216,13 @@ public class EventRegisterActivity extends BaseRegisterActivity {
                                 @Override
                                 public void run() {
                                     if (res) {
-                                        Toast.makeText(EventRegisterActivity.this, "上传成功!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ActivityRegisterActivity.this, "上传成功!", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent();
                                         intent.putExtra("upload_status",true);
                                         setResult(RESULT_OK,intent);
                                         finish();
                                     } else {
-                                        Toast.makeText(EventRegisterActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ActivityRegisterActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -337,7 +334,7 @@ public class EventRegisterActivity extends BaseRegisterActivity {
     //必填项为空错误提示
     private void showPrompt(int flag) {
         if (flag == Constants.CLICK_BACK_BUTTON) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(EventRegisterActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ActivityRegisterActivity.this);
             builder.setTitle("温馨提示");
             builder.setMessage("有必填项为空，返回后相关信息不会保存");
             builder.setCancelable(false);
