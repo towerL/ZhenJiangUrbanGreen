@@ -24,6 +24,12 @@ android:orientation="vertical" >
             />
 
     </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
+
+    <include layout="@layout/task_list_emptyview" />
 
     <com.aspsine.swipetoloadlayout.SwipeToLoadLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -47,6 +53,7 @@ android:orientation="vertical" >
 
         </ListView>
     </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
+    </FrameLayout>
 
 
 </LinearLayout>

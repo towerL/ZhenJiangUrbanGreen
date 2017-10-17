@@ -128,6 +128,8 @@ public class MessageListActivity extends BaseActivity {
     }
 
     private void initListView(final boolean readflag) {
+        findViewById(R.id.task_list_emptyview).setVisibility(View.INVISIBLE);
+        findViewById(R.id.swipeToLoadLayout).setVisibility(View.VISIBLE);
         MessageAdapter adapter = new MessageAdapter(MessageListActivity.this, R.layout.message_list_item, messageList);
 //        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 //        swipeRefresh.setColorSchemeColors(2);
@@ -145,8 +147,8 @@ public class MessageListActivity extends BaseActivity {
 
     private void initEmptyListView() {
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"没有内容"});
-        swipeTarget.setAdapter(adapter);
+        findViewById(R.id.task_list_emptyview).setVisibility(View.VISIBLE);
+        findViewById(R.id.swipeToLoadLayout).setVisibility(View.INVISIBLE);
     }
 
 
