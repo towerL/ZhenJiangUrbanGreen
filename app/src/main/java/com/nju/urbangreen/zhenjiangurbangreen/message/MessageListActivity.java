@@ -3,7 +3,6 @@ package com.nju.urbangreen.zhenjiangurbangreen.message;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -16,10 +15,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.nju.urbangreen.zhenjiangurbangreen.R;
 import com.nju.urbangreen.zhenjiangurbangreen.basisClass.BaseActivity;
 import com.nju.urbangreen.zhenjiangurbangreen.util.WebServiceUtils;
-import com.nju.urbangreen.zhenjiangurbangreen.widget.TitleBarLayout;
+import com.nju.urbangreen.zhenjiangurbangreen.widget.RefreshHeaderView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +34,15 @@ import butterknife.ButterKnife;
 
 public class MessageListActivity extends BaseActivity {
     @BindView(R.id.Toolbar_simple)
-    public Toolbar toolbar;
-    public TitleBarLayout titleBarLayout;//标题栏
-    @BindView(R.id.list)
-    ListView listView;
+    Toolbar toolbar;
+    @BindView(R.id.message_spinner)
+    Spinner messageSpinner;
+    @BindView(R.id.swipeToLoadLayout)
+    SwipeToLoadLayout swipeToLoadLayout;
+    @BindView(R.id.swipe_refresh_header)
+    RefreshHeaderView swipeRefreshHeader;
+    @BindView(R.id.swipe_target)
+    ListView swipeTarget;
 
     private List<Message> messageList = new ArrayList<>();
     AlertDialog viewMessageDialog;
@@ -44,14 +50,13 @@ public class MessageListActivity extends BaseActivity {
     MessageAdapter adapter;
     Spinner spinner;
     boolean readflag;
-    private SwipeRefreshLayout swipeRefresh;
+//    private SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_main_activity);
         ButterKnife.bind(this);
-        // setTitleBarLayout();
         initToolbar();
         spinner = (Spinner) findViewById(R.id.message_spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -77,28 +82,15 @@ public class MessageListActivity extends BaseActivity {
             }
         });
 
+        swipeToLoadLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshMessage(readflag);
+            }
+        });
 
     }
 
-    public void setTitleBarLayout() {
-        //初始化TitleBarLayout
-        titleBarLayout.setTitleText("xiaoxi");
-        titleBarLayout.setBtnBackClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        //右侧的自定义按钮此时为搜索按钮，点击是会显示出TitleSearchView
-        titleBarLayout.setBtnSelfDefBkg(R.drawable.ic_btn_self_def_search);
-        titleBarLayout.setBtnSelfDefClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //显示出TitleSearchView
-                titleBarLayout.setTsvSearchAvailable();
-            }
-        });
-    }
 
     private void initToolbar() {
         ButterKnife.bind(this);
@@ -137,24 +129,24 @@ public class MessageListActivity extends BaseActivity {
 
     private void initListView(final boolean readflag) {
         MessageAdapter adapter = new MessageAdapter(MessageListActivity.this, R.layout.message_list_item, messageList);
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        swipeRefresh.setColorSchemeColors(2);
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-
-            public void onRefresh() {
-                refreshMessage(readflag);
-            }
-        });
-        listView.setAdapter(adapter);
+//        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+//        swipeRefresh.setColorSchemeColors(2);
+//        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//
+//            public void onRefresh() {
+//                refreshMessage(readflag);
+//            }
+//        });
+        swipeTarget.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        listView.setOnItemClickListener(new MessageListOnItemClickListener());
-        listView.setOnItemLongClickListener(new MessageListOnItemLongClickListener());
+        swipeTarget.setOnItemClickListener(new MessageListOnItemClickListener());
+        swipeTarget.setOnItemLongClickListener(new MessageListOnItemLongClickListener());
     }
 
     private void initEmptyListView() {
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,new String[]{"没有内容"});
-        listView.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"没有内容"});
+        swipeTarget.setAdapter(adapter);
     }
 
 
@@ -173,7 +165,8 @@ public class MessageListActivity extends BaseActivity {
                     @Override
                     public void run() {
                         getMessageList(readflag);
-                        swipeRefresh.setRefreshing(false);
+//                        swipeRefresh.setRefreshing(false);
+                        swipeToLoadLayout.setRefreshing(false);
 //                        Looper.prepare();
 //                        Toast.makeText(MessageListActivity.this,"正在刷新",Toast.LENGTH_SHORT).show();
 

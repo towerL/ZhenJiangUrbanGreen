@@ -44,8 +44,8 @@ public class InspectRegisterActivity extends BaseRegisterActivity {
     android.support.v7.widget.Toolbar toolbar;
     @BindView(R.id.material_search_view)
     MaterialSearchView materialSearchView;
-    @BindView(R.id.tv_inspectInfo_ID)
-    TextView tvInspectInfoID;
+    @BindView(R.id.tv_inspectInfo_code)
+    TextView tvInspectInfoCode;
     @BindView(R.id.droplist_inspectInfo_type)
     DropdownEditText droplistInspectInfoType;
     @BindView(R.id.et_inspectInfo_date)
@@ -129,7 +129,7 @@ public class InspectRegisterActivity extends BaseRegisterActivity {
         Serializable serializableObject = intent.getSerializableExtra("inspect_object");
         if (serializableObject != null) {
             inspectObject = (Inspect) serializableObject;
-            tvInspectInfoID.setText(inspectObject.getIR_ID());
+            tvInspectInfoCode.setText(inspectObject.getIR_Code());
             droplistInspectInfoType.setText(inspectObject.getIR_Type());
             etInspectInfoDate.setText(inspectObject.getIR_InspectDate());
             etInspectInfoScore.setText(inspectObject.getIR_Score());
@@ -177,7 +177,7 @@ public class InspectRegisterActivity extends BaseRegisterActivity {
                         @Override
                         public void run() {
                             final Boolean res;
-                            if (tvInspectInfoID.getText() == "") {
+                            if (tvInspectInfoCode.getText() == "") {
                                 res = WebServiceUtils.AddInspectRecord(errMsg, inspectObject);
                             } else {
                                 res = WebServiceUtils.UpdateInspectRecord(errMsg, inspectObject);
@@ -209,7 +209,7 @@ public class InspectRegisterActivity extends BaseRegisterActivity {
         inspectObject = new Inspect();
         inspectObject.setIR_Type(droplistInspectInfoType.getText());
         inspectObject.setIR_InspectDate(etInspectInfoDate.getText().toString());
-        inspectObject.setIR_ID(tvInspectInfoID.getText().toString());
+        inspectObject.setIR_ID(tvInspectInfoCode.getText().toString());
         inspectObject.setUGO_IDs(getUGOIDs());
         Log.d("ira", "outputObject: "+getUGOIDs());
         if(etInspectInfoOpinion.getText()!=null){

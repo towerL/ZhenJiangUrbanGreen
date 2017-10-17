@@ -40,9 +40,9 @@
                     style="@style/RecordItem">
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="养护记录ID"/>
+                        android:text="养护记录CODE"/>
                     <TextView
-                        android:id="@+id/tv_maintainInfo_ID"
+                        android:id="@+id/tv_maintainInfo_Code"
                         style="@style/RecordItemText" />
                 </TableRow>
 

@@ -35,9 +35,9 @@
                     style="@style/RecordItem">
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="巡查记录ID"/>
+                        android:text="巡查记录CODE"/>
                     <TextView
-                        android:id="@+id/tv_inspectInfo_ID"
+                        android:id="@+id/tv_inspectInfo_code"
                         style="@style/RecordItemText" />
                 </TableRow>
 

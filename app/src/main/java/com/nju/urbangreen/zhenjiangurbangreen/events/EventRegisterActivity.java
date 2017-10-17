@@ -43,8 +43,8 @@ public class EventRegisterActivity extends BaseRegisterActivity {
     TableLayout lyEventInfoTable;
     @BindView(R.id.Toolbar)
     Toolbar toolbar;
-    @BindView(R.id.edit_event_register_id)
-    public TextView tvId;
+    @BindView(R.id.edit_event_register_code)
+    public TextView tvCode;
     @BindView(R.id.edit_event_register_name)
     public EditText etName;
     @BindView(R.id.droplist_event_register_type)
@@ -113,7 +113,7 @@ public class EventRegisterActivity extends BaseRegisterActivity {
         Serializable serializableObject = intent.getSerializableExtra("event_object");
         if (serializableObject != null) {
             eventObject = (OneEvent) serializableObject;
-            tvId.setText(eventObject.getUGE_ID());
+            tvCode.setText(eventObject.getUGE_Code());
             etName.setText(eventObject.getUGE_Name());
             dropdownEventType.setText(eventObject.getUGE_Type());
             etLocation.setText(eventObject.getUGE_Location());
@@ -208,7 +208,7 @@ public class EventRegisterActivity extends BaseRegisterActivity {
                         @Override
                         public void run() {
                             final Boolean res;
-                            if (tvId.getText().toString()== "") {
+                            if (tvCode.getText().toString()== "") {
                                // eventObject.setUGE_EventOrActivity(false);//false是事件，true是活动
                                 res = WebServiceUtils.AddEvent(errMsg, eventObject);
                             } else {
@@ -246,8 +246,8 @@ public class EventRegisterActivity extends BaseRegisterActivity {
         eventObject.setUGE_Location(etLocation.getText().toString());
 
 
-        if (tvId.getText() != null) {
-            eventObject.setUGE_ID(tvId.getText().toString());
+        if (tvCode.getText() != null) {
+            eventObject.setUGE_ID(tvCode.getText().toString());
         }
         if (etDamageDegree.getText() != null) {
             eventObject.setUGE_DamageDegree((etDamageDegree.getText()).toString());

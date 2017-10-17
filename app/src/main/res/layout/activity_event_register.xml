@@ -38,7 +38,7 @@
                         android:text="事件编号" />
 
                     <TextView
-                        android:id="@+id/edit_event_register_id"
+                        android:id="@+id/edit_event_register_code"
                         style="@style/RecordItemContent" />
                 </TableRow>
 

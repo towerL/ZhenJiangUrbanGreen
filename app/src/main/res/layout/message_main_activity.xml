@@ -25,20 +25,28 @@ android:orientation="vertical" >
 
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipeToLoadLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.nju.urbangreen.zhenjiangurbangreen.widget.RefreshHeaderView
+            android:id="@id/swipe_refresh_header"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            />
+
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/swipe_target"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:cacheColorHint="#FFF" >
 
         </ListView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
 
 
 </LinearLayout>

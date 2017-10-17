@@ -40,8 +40,8 @@ import butterknife.ButterKnife;
 
 public class MaintainRegisterActivity extends BaseRegisterActivity {
 
-    @BindView(R.id.tv_maintainInfo_ID)
-    TextView tvMaintainID;
+    @BindView(R.id.tv_maintainInfo_Code)
+    TextView tvMaintainCode;
     @BindView(R.id.et_maintainInfo_date)
     EditText etMaintainDate;
     @BindView(R.id.droplist_maintainInfo_type)
@@ -91,7 +91,7 @@ public class MaintainRegisterActivity extends BaseRegisterActivity {
         Serializable serializableObject = intent.getSerializableExtra("maintain_object");
         if (serializableObject != null) {
             maintainObject = (Maintain) serializableObject;
-            tvMaintainID.setText(maintainObject.MR_ID);
+            tvMaintainCode.setText(maintainObject.MR_Code);
             dropdownMaintainType.setText(maintainObject.MR_MaintainType);
             etMaintainDate.setText(maintainObject.MR_MaintainDate);
             etMaintainStaff.setText(maintainObject.MR_MaintainStaff);
@@ -174,7 +174,7 @@ public class MaintainRegisterActivity extends BaseRegisterActivity {
                         @Override
                         public void run() {
                             final Boolean res;
-                            if (tvMaintainID.getText() == "") {
+                            if (tvMaintainCode.getText() == "") {
                                 res = WebServiceUtils.AddMaintainRecord(errMsg, maintainObject);
                             } else {
                                 res = WebServiceUtils.UpdateMaintainRecord(errMsg, maintainObject);
@@ -211,8 +211,8 @@ public class MaintainRegisterActivity extends BaseRegisterActivity {
         if (etMaintainContent.getText() != null) {
             maintainObject.MR_MaintainContent = etMaintainContent.getText().toString();
         }
-        if(tvMaintainID.getText()!=null){
-            maintainObject.MR_ID = tvMaintainID.getText().toString();
+        if(tvMaintainCode.getText()!=null){
+            maintainObject.MR_Code = tvMaintainCode.getText().toString();
         }
         maintainObject.UGO_IDs = getUGOIDs();
     }
