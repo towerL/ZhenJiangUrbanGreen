@@ -12,7 +12,7 @@ public class OneEvent implements Serializable{
     private String UGE_Code;
     private String UGE_DamageDegree;
     private String UGE_Name;
-    private boolean UGE_EventOrActivity;
+    private boolean UGE_EventOrActivity;  //false 事件，true 活动
     private String UGE_Type;
     private String UGE_Description;
     private String UGE_Location;

@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,10 +55,10 @@ public class SearchUgoActivity extends BaseActivity {
     private String sugAddresses[];
     private ProgressDialog loadingDialog;
     private UgoListAdapter adapter;
+    private MultipleAdapter multipleAdapter;
     private List<GreenObject> searchResult = new ArrayList<>();
     private List<GreenObject> selectResult = new ArrayList<>();
     public String flag;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +74,21 @@ public class SearchUgoActivity extends BaseActivity {
         initSuggestionList();
     }
 
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if(REQUEST_CODE == requestCode && resultCode == 200) {
+//            ArrayList<GreenObject> result = (ArrayList<GreenObject>) data.getSerializableExtra("selectedUGOs");
+//            searchResult.addAll(result);
+//            if(multipleAdapter == null) {
+//                initRecyclerView();
+//            }
+//            adapter.notifyDataSetChanged();
+//            multipleAdapter.notifyDataSetChanged();
+//        }
+//    }
 
     private void initToolbar() {
-        toolbar.setTitle("搜索绿化对象");
+        toolbar.setTitle("添加绿化对象");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -108,8 +121,14 @@ public class SearchUgoActivity extends BaseActivity {
 //                            Log.d("tag", "selectresult" + selectResult.size());
                             ACache mCache = ACache.get(SearchUgoActivity.this);
                             List<GreenObject> selectList = mCache.getAsObjectList("ugo_select");
+                            for(GreenObject o : selectList){
+                                Log.d("selectlist ",o.UGO_Address);
+                            }
                             searchResult = ListUtil.trim(searchResult, selectList);  //去除已经选择的item
                             adapter.notifyDataSetChanged();
+                            for(GreenObject o : searchResult){
+                                Log.d("selectlist ",o.UGO_Address);
+                            }
 //                            searchResult.removeAll(selectList); //去除已经选择的item
 //                            searchResult.removeAll(selectResult);     //去除已经选择的item
 //                            Log.d("tag", "searchresultafter" + searchResult.size() + "");
@@ -122,7 +141,7 @@ public class SearchUgoActivity extends BaseActivity {
                             public void run() {
                                 loadingDialog.dismiss();
                                 if (searchResult == null) {
-                                    Toast.makeText(SearchUgoActivity.this, "找不到结果(是否没输入完整的Code？)", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SearchUgoActivity.this, "找不到结果", Toast.LENGTH_SHORT).show();
                                     searchView.clearFocus();
                                 } else {
                                     initRecyclerView();
@@ -193,7 +212,7 @@ public class SearchUgoActivity extends BaseActivity {
         recyclerUgoSearchResult.setLayoutManager(linearLayoutManager);
         adapter = new UgoListAdapter(searchResult);
 
-        MultipleAdapter multipleAdapter = MultipleSelect.with(this)
+        multipleAdapter = MultipleSelect.with(this)
                 .adapter(adapter)
                 .decorateFactory(new CheckBoxFactory(R.color.colorPrimary))
                 .stateChangeListener(new StateChangeListener() {

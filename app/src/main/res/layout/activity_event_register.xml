@@ -35,7 +35,7 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件编号" />
+                        android:text="记录编号" />
 
                     <TextView
                         android:id="@+id/edit_event_register_code"
@@ -89,8 +89,7 @@
                         android:background="@drawable/bkg_edittext"
                         android:clickable="true"
                         android:focusable="false"
-                        android:gravity="center"
-                        android:paddingLeft="0dp" />
+                         />
                 </TableRow>
 
                 <TableRow style="@style/RecordItem">
@@ -137,71 +136,16 @@
 
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="事件相关方" />
-
-                    <EditText
-                        android:id="@+id/edit_event_register_relevant_person"
-                        style="@style/RecordItemContent"
-                        android:background="@drawable/bkg_edittext" />
-                </TableRow>
-
-                <TableRow style="@style/RecordItem">
-
-                    <TextView
-                        style="@style/RecordItemTitle"
-                        android:text="相关方车牌号" />
-
-                    <EditText
-                        android:id="@+id/edit_event_register_relevant_license_plate"
-                        style="@style/RecordItemContent"
-                        android:background="@drawable/bkg_edittext" />
-                </TableRow>
-
-                <TableRow style="@style/RecordItem">
-
-                    <TextView
-                        style="@style/RecordItemTitle"
-                        android:text="相关方所属单位" />
-
-                    <EditText
-                        android:id="@+id/edit_event_register_relevant_company"
-                        style="@style/RecordItemContent"
-                        android:background="@drawable/bkg_edittext" />
-                </TableRow>
-
-                <TableRow style="@style/RecordItem">
-
-                    <TextView
-                        style="@style/RecordItemTitle"
-                        android:text="相关方联系方式" />
-
-                    <EditText
-                        android:id="@+id/edit_event_register_relevant_contact"
-                        style="@style/RecordItemContent"
-                        android:background="@drawable/bkg_edittext"
-                        android:inputType="phone" />
-                </TableRow>
-
-                <TableRow style="@style/RecordItem">
-
-                    <TextView
-                        style="@style/RecordItemTitle"
-                        android:text="相关方通讯地址" />
-
-                    <EditText
-                        android:id="@+id/edit_event_register_relevant_address"
-                        style="@style/RecordItemContent"
-                        android:background="@drawable/bkg_edittext" />
-                </TableRow>
-
-                <TableRow style="@style/RecordItem">
-
-                    <TextView
-                        style="@style/RecordItemTitle"
                         android:text="事件描述" />
 
                     <EditText
                         android:id="@+id/edit_event_register_description"
+                        android:inputType="textMultiLine"
+                        android:minLines="5"
+                        android:maxLines="10"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|start"
+                        android:scrollbars="vertical"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
@@ -214,21 +158,16 @@
 
                     <EditText
                         android:id="@+id/edit_event_register_reason"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
+                        android:minLines="5"
+                        android:maxLines="10"
+                        android:gravity="top|start"
+                        android:scrollbars="vertical"
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext" />
                 </TableRow>
 
-                <TableRow style="@style/RecordItem">
-
-                    <TextView
-                        style="@style/RecordItemTitle"
-                        android:text="相关方其他说明" />
-
-                    <EditText
-                        android:id="@+id/edit_event_register_relevant_description"
-                        style="@style/RecordItemContent"
-                        android:background="@drawable/bkg_edittext" />
-                </TableRow>
             </TableLayout>
             <android.support.v7.widget.AppCompatButton
                 android:background="@drawable/button_shape"
@@ -239,7 +178,7 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="8dp"
-                android:text="提交"
+                android:text="@string/save"
                 android:textSize="20sp"
                 android:textColor="#FFFFFF"/>
 

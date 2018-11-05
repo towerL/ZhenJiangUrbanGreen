@@ -40,7 +40,7 @@
                     style="@style/RecordItem">
                     <TextView
                         style="@style/RecordItemTitle"
-                        android:text="养护记录CODE"/>
+                        android:text="记录编号"/>
                     <TextView
                         android:id="@+id/tv_maintainInfo_Code"
                         style="@style/RecordItemText" />
@@ -77,8 +77,7 @@
                         style="@style/RecordItemContent"
                         android:background="@drawable/bkg_edittext"
                         android:clickable="true"
-                        android:focusable="false"
-                        android:gravity="center"/>
+                        android:focusable="false"/>
                 </TableRow>
 
                 <TableRow
@@ -111,6 +110,13 @@
                     <EditText
                         android:id="@+id/et_maintainInfo_content"
                         style="@style/RecordItemContent"
+                        android:inputType="textMultiLine"
+                        android:minLines="5"
+                        android:maxLines="10"
+                        android:scrollbars="vertical"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|start"
+                        android:paddingTop="5dp"
                         android:background="@drawable/bkg_edittext"/>
                 </TableRow>
 
@@ -170,7 +176,7 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="8dp"
-                android:text="提交"
+                android:text="@string/save"
                 android:textSize="20sp"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>

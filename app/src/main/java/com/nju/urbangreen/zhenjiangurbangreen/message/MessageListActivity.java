@@ -191,7 +191,7 @@ public class MessageListActivity extends BaseActivity {
             tmp.findViewById(R.id.title_delete).setVisibility(View.GONE);
 
             final Message message = messageList.get(position);
-            String time = message.getQM_CreateTime().substring(0, 19).replace("T", " ");
+            String time = message.getQM_CreateTime().substring(0, 16).replace("T", " ");
             TextView textView1 = (TextView) tmp.findViewById(R.id.Time);
             textView1.setText(time);
             TextView textView2 = (TextView) tmp.findViewById(R.id.Sender);

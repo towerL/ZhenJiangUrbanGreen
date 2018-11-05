@@ -10,14 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
@@ -65,6 +63,7 @@ public class EventListActivity extends BaseActivity {
     public static final int GET_REGISTER_RESULT = 1;
     private EventListAdapter adapter;
     private List<OneEvent> eventList = new ArrayList<>();
+    private List<OneEvent> eventSugList = new ArrayList<>();
     private int page = 2;
 
     private String id;
@@ -93,6 +92,7 @@ public class EventListActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         CacheUtil.removeRelatedUgos();
+        getEvent(multiQuery);
     }
 
     @Override
@@ -214,7 +214,7 @@ public class EventListActivity extends BaseActivity {
         MenuItem item = menu.findItem(R.id.menu_toolbar_item_search);
 
         //添加spinner
-        MenuItem spinnerItem = menu.findItem(R.id.event_spinner);
+        final MenuItem spinnerItem = menu.findItem(R.id.event_spinner);
         Spinner event_spinner = (Spinner) MenuItemCompat.getActionView(spinnerItem);
         String[] data = {"事件", "活动"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, data);
@@ -239,7 +239,55 @@ public class EventListActivity extends BaseActivity {
         });
 
         searchView.setMenuItem(item);
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+                //从服务端获取object
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] errMsg = new String[1];
+                        final OneEvent event = WebServiceUtils.searchEventRecord(errMsg,query);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(event == null){
+                                    Toast.makeText(EventListActivity.this, "没有搜索到相关内容", Toast.LENGTH_SHORT).show();
+                                    return ;
+                                }
+                                if (event.isUGE_EventOrActivity()) {
+                                    Intent intent = new Intent(EventListActivity.this, ActivityRegisterActivity.class);
+                                    intent.putExtra("event_object", event);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent2 = new Intent(EventListActivity.this, EventRegisterActivity.class);
+                                    intent2.putExtra("event_object", event);
+                                    startActivity(intent2);
+                                }
+                            }
+                        });
+                    }
 
+                }).start();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                getEventSug();
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -373,5 +421,29 @@ public class EventListActivity extends BaseActivity {
         });
 
         popupMenu.show();
+    }
+
+    private void getEventSug() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String[] errMsg = new String[1];
+                eventSugList = WebServiceUtils.getEventSug(errMsg);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setEventSug();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    private void setEventSug(){
+        String [] eventSuggestions = new String[eventSugList.size()];
+        for(int i =0; i < eventSugList.size(); i++){
+            eventSuggestions[i] = eventSugList.get(i).getUGE_Code();
+        }
+        searchView.setSuggestions(eventSuggestions);
     }
 }

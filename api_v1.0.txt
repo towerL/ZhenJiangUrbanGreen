@@ -1,4 +1,4 @@
-﻿Param中带"*"的为一定包含的参数
+Param中带"*"的为一定包含的参数
 
 // 获取列表信息
 1.获取管养记录
@@ -196,6 +196,22 @@
         UGO_Address
     }>
 
+8.1获取绿化对象(某个点周围)
+    Method: GetNearUGO
+    Param: {
+    *   string pos_json_str,
+    *   double radius
+    }
+    Return: List<{
+        UGO_ID
+        UGO_Ucode
+        UGO_ClassType_ID
+        UGO_Name
+        UGO_Name_PinYinAbbrevation
+        UGO_Geo_Location
+        UGO_Address
+    }>
+
 9.获取记录的附件信息
     Method: GetRecordAttachment
     Param: {
@@ -351,13 +367,13 @@
 3. 获得所有巡查记录
     Method: GetIRSuggest
     Return: List<{
-        string MR_Code
+        string IR_Code
     }>
 
 4. 获得所有事件记录
     Method: GetEventSuggest
     Return: List<{
-        string MR_Code
+        string UGE_Code
     }>
 
 // 搜索记录信息
@@ -420,7 +436,7 @@
     Param: {
     *   string code 管养对象MR_Code(精确搜索)
     }
-    Return: List<{
+    Return: {
         MR_ID
         MR_Code
         MR_CompanyID
@@ -442,8 +458,67 @@
         MR_LoggerName
         MR_LastEditorName
         MR_SubmitorName
-    }>
-
+    }
+    
+    4.搜索巡查记录
+    Method: SearchInspectRecord
+    Param: {
+    *   string code 巡查对象IR_Code(精确搜索)
+    }
+    Return:{
+        IR_ID
+        IR_Code
+        FlowNo_In_CodeGroup
+        IR_Type
+        IR_InspectDate
+        IR_Location
+        IR_Inspector
+        IR_Score
+        IR_Content
+        IR_InspectOpinion
+        IR_LoggerPID
+        IR_LogTime
+        IR_LastEditorPID
+        IR_LastEditTime
+    }
+    
+    5.搜索事件记录
+    Method: SearchEventRecord
+    Param: {
+    *   string code 事件对象UGE_Code(精确搜索)
+    }
+    Return: {
+        UGE_ID
+        UGE_Code
+        FlowNo_in_CodeGroup
+        UGE_DamageDegree
+        UGE_Name
+        UGE_EventOrActivity
+        UGE_Type
+        UGE_Description
+        UGE_Location
+        UGE_Time
+        UGE_Endtime
+        UGE_Reason
+        UGE_LoggerPID
+        UGE_LogTime
+        UGE_LastEditorPID
+        UGE_LastEditTime
+        UGE_IsConcluded
+        UGE_ConcludePID
+        UGE_ConcludeTime
+        UGE_ConcludeDescription
+        UGE_TotalFee
+        UGE_LostFee
+        UGE_Compensation
+        UGE_RelevantPerson
+        UGE_RelevantLicensePlate
+        UGE_RelevantContact
+        UGE_RelevantCompany
+        UGE_RelevantAddress
+        UGE_RelevantDescription
+        UGE_LastStateID
+    }
 
 //删除附件
     Method: RemoveAttachment

@@ -87,7 +87,7 @@ public class SettingsActivity extends BaseActivity {
                     return;
                 }
                 try {
-                    WebServiceUtils.putServerAddress(etURL.getText().toString());
+                    WebServiceUtils.putServerAddress("http://" + etURL.getText().toString());
                 } catch (Exception e) {
                     Toast.makeText(SettingsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     return;
@@ -98,7 +98,7 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void setURL() {
-        etURL.setText(WebServiceUtils.getServerAddress());
+        etURL.setText(WebServiceUtils.getServerAddress().replace("http://",""));
     }
 
     private void showFormatErrorToast(String key) {

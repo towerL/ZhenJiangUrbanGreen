@@ -46,7 +46,7 @@ public class EventListAdapter extends RecyclerView.Adapter<BaseItemViewHolder>{
     public void onBindViewHolder(BaseItemViewHolder viewHolder, int i) {
         OneEvent oneEvent = eventList.get(i);
         viewHolder.itemTitle.setText(oneEvent.getUGE_Code() + "/" + oneEvent.getUGE_Type());
-        viewHolder.itemContent.setText(oneEvent.getUGE_Description());
+        viewHolder.itemContent.setText(oneEvent.getUGE_Name());
 
     }
 

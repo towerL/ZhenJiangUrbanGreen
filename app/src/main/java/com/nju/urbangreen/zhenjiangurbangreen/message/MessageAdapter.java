@@ -25,7 +25,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     }
     public View getView(int position, View convertView, ViewGroup parent){
         Message message=getItem(position);
-        String time= message.getQM_CreateTime().substring(0,19).replace("T"," ");
+        String time= message.getQM_CreateTime().substring(0,16).replace("T"," ");
         View view= LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
         TextView sendort=(TextView)view.findViewById(R.id.Sender_Label);
         TextView messaget=(TextView)view.findViewById(R.id.Msg);

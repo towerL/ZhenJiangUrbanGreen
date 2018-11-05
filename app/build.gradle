@@ -52,6 +52,7 @@ dependencies {
     compile 'com.github.goyourfly:MultiSelectAdapter:3.8'
     compile 'com.github.dongjunkun:DropDownMenu:1.0.4'
     compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
     //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'

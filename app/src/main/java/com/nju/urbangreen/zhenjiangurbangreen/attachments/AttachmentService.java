@@ -68,13 +68,14 @@ public class AttachmentService {
 
     public static void renameAttach(Context context, final AttachmentRecord attach,
                                     final AttachmentService.Callback cb) {
+        final String extension = attach.fileName.substring(attach.fileName.lastIndexOf("."),attach.fileName.length());
         new MaterialDialog.Builder(context)
                 .title("重命名文件")
                 .inputType(InputType.TYPE_CLASS_TEXT)
-                .input("文件名", attach.fileName, new MaterialDialog.InputCallback() {
+                .input("文件名", attach.fileName.substring(0,attach.fileName.lastIndexOf(".")), new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        attach.fileName = input.toString();
+                        attach.fileName = input.toString() + extension;
                     }
                 })
                 .onPositive(new MaterialDialog.SingleButtonCallback() {

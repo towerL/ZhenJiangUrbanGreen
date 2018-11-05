@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryLight">#663F51B5</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccentLight">#66FF4081</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorEmptyWarning">#f50057</color>
     <color name="colorBackground">#ffffff</color>
@@ -11,4 +13,5 @@
 	<color name="background_tab_pressed">#6633B5E5</color>
     <color name="green_land">#bb8BFA92</color>
     <color name="green_land_border">#dd52ab57</color>
+    <color name="buffer">#223f51B5</color>
 </resources>
